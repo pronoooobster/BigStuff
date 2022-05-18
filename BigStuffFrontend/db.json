@@ -1,0 +1,32 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "text": "Math homework",
+      "deadline": "2020-07-10 15:00:00.000",
+      "importance": 3,
+      "reminder": false
+    },
+    {
+      "id": 2,
+      "text": "Coock rice",
+      "deadline": "2020-07-10 15:00:00.000",
+      "importance": 0,
+      "reminder": true
+    },
+    {
+      "id": 3,
+      "text": "Food Shopping",
+      "deadline": "2020-07-10 15:00:00.000",
+      "importance": 0,
+      "reminder": false
+    },
+    {
+      "text": "Group project",
+      "deadline": "2022-09-09T19:09",
+      "reminder": false,
+      "importance": 12,
+      "id": 4
+    }
+  ]
+}
