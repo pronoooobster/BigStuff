@@ -4,16 +4,10 @@ const Joi = require('joi');
 const http = require('http');
 const { use } = require('express/lib/application');
 const express = require('express');
-const cors = require('cors');
 const app = express();
 const apiPort = process.env.PORT || 3000;
 
 app.use(express.json());
-
-const corsOptions = {
-    origin: ['https://bigstuff.vercel.app/', 'https://bigstuff-pronoooobster.vercel.app/', 'https://bigstuff-git-main-pronoooobster.vercel.app/'],
-    optionsSuccessStatus: 200
-}
 
                                         // database connection configuration
 var db_con = mysql.createConnection({
@@ -41,24 +35,16 @@ function validateTask(task) {
     return schema.validate(task);
 }
 
-app.use(function (req, res, next) {
-
-    res.setHeader('Access-Control-Allow-Origin', 'https://bigstuff.vercel.app/');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-
-    next();
-});
-
                                         // GET requests 
-app.get('/', cors(), (req, res) => {
+app.get('/', (req, res) => {
+    res.set('Access-Control-Allow-Origin', 'https://bigstuff.vercel.app/');
     res.send('It works!');
     res.end();
 });
                                             // reqests in format 
                                             // /api/tasks?user_id=0
-app.get('/api/tasks', cors(corsOptions), (req, res) => {
+app.get('/api/tasks', (req, res) => {
+    res.set('Access-Control-Allow-Origin', 'https://bigstuff.vercel.app/');
     let user_id = parseInt( req.query.user_id );
     console.log(`GET Request for list of tasks detected with user_id=${user_id};`); 
     let curr_querry = `SELECT * FROM Tasks WHERE user_id = ${user_id} ORDER BY priority DESC;`;
@@ -70,7 +56,8 @@ app.get('/api/tasks', cors(corsOptions), (req, res) => {
 });
                                             // requests for specific tasks in format
                                             // /api/tasks/1
-app.get('/api/tasks/:task_id', cors(corsOptions), (req, res) => {
+app.get('/api/tasks/:task_id', (req, res) => {
+    res.set('Access-Control-Allow-Origin', 'https://bigstuff.vercel.app/');
     let task_id = parseInt( req.params.task_id );
     console.log(`GET Request for task detected with task_id=${task_id};`); 
     let curr_querry = `SELECT * FROM Tasks WHERE task_id = ${task_id} ORDER BY priority DESC;`;
@@ -82,7 +69,8 @@ app.get('/api/tasks/:task_id', cors(corsOptions), (req, res) => {
 });
 
                                             // POST requests
-app.post('/api/tasks', cors(corsOptions), (req, res) => {
+app.post('/api/tasks', (req, res) => {
+    res.set('Access-Control-Allow-Origin', 'https://bigstuff.vercel.app/');
     const { error } = validateTask(req.body);
     if(error) {
         res.status(400).send(error.details[0].message);
@@ -111,7 +99,8 @@ app.post('/api/tasks', cors(corsOptions), (req, res) => {
                                         // PUT reqests
                                         // reqests in format
                                         // /api/tasks/0
-app.put('/api/tasks/:task_id', cors(corsOptions), (req, res) => {
+app.put('/api/tasks/:task_id', (req, res) => {
+    res.set('Access-Control-Allow-Origin', 'https://bigstuff.vercel.app/');
     let task_id = parseInt( req.params.task_id );
     console.log(`PUT Request for task detected with task_id=${task_id};`); 
     let curr_querry = `SELECT EXISTS (SELECT task_id FROM Tasks WHERE task_id = ${task_id}) as output;`;
@@ -142,7 +131,8 @@ app.put('/api/tasks/:task_id', cors(corsOptions), (req, res) => {
                                         // DELETE requests
                                         // reqests in format
                                         // /api/tasks/0
-app.delete('/api/tasks/:task_id', cors(corsOptions), (req, res) => {
+app.delete('/api/tasks/:task_id', (req, res) => {
+    res.set('Access-Control-Allow-Origin', 'https://bigstuff.vercel.app/');
     let task_id = parseInt( req.params.task_id );
     console.log(`DELETE Request for task detected with task_id=${task_id};`); 
     let curr_querry = `SELECT EXISTS (SELECT task_id FROM Tasks WHERE task_id = ${task_id}) as output;`;
