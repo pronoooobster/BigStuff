@@ -41,6 +41,16 @@ function validateTask(task) {
     return schema.validate(task);
 }
 
+app.use(function (req, res, next) {
+
+    res.setHeader('Access-Control-Allow-Origin', 'https://bigstuff.vercel.app/');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    next();
+});
+
                                         // GET requests 
 app.get('/', cors(), (req, res) => {
     res.send('It works!');
