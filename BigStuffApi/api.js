@@ -3,11 +3,18 @@ var mysql = require('mysql');
 const Joi = require('joi');
 const http = require('http');
 const express = require('express');
+const cors = require('cors');
 const { use } = require('express/lib/application');
 const app = express();
 const apiPort = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(cors());
+
+const options = {
+    origin: 'https://bigstuff.vercel.app/',
+}
+app.use(cors(options));
                                         // database connection configuration
 var db_con = mysql.createConnection({
     host: 'sql11.freemysqlhosting.net',
