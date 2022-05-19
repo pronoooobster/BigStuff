@@ -9,10 +9,10 @@ const app = express();
 const apiPort = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(cors());
 
 const options = {
     origin: 'https://bigstuff.vercel.app/',
+    optionsSuccessStatus: 200
 }
 app.use(cors(options));
                                         // database connection configuration
