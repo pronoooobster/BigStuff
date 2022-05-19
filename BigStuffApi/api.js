@@ -146,3 +146,5 @@ app.delete('/api/tasks/:task_id', (req, res) => {
 });
 
 app.listen(apiPort, () => { console.log(`Listening on ${apiPort}`); });
+
+module.exports = app;

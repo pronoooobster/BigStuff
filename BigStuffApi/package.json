@@ -70,7 +70,8 @@
     "unpipe": "^1.0.0",
     "util-deprecate": "^1.0.2",
     "utils-merge": "^1.0.1",
-    "vary": "^1.1.2"
+    "vary": "^1.1.2",
+    "vercel": "^24.2.3"
   },
   "scripts": {
     "start": "nodemon api.js",
