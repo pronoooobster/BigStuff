@@ -2,19 +2,19 @@
 var mysql = require('mysql');
 const Joi = require('joi');
 const http = require('http');
+const { use } = require('express/lib/application');
 const express = require('express');
 const cors = require('cors');
-const { use } = require('express/lib/application');
 const app = express();
 const apiPort = process.env.PORT || 3000;
 
 app.use(express.json());
 
-const options = {
-    origin: 'https://bigstuff.vercel.app/',
+const corsOptions = {
+    origin: ['https://bigstuff.vercel.app/', 'https://bigstuff-pronoooobster.vercel.app/', 'https://bigstuff-git-main-pronoooobster.vercel.app/'],
     optionsSuccessStatus: 200
 }
-app.use(cors(options));
+
                                         // database connection configuration
 var db_con = mysql.createConnection({
     host: 'sql11.freemysqlhosting.net',
@@ -42,13 +42,13 @@ function validateTask(task) {
 }
 
                                         // GET requests 
-app.get('/', (req, res) => {
+app.get('/', cors(), (req, res) => {
     res.send('It works!');
     res.end();
 });
                                             // reqests in format 
                                             // /api/tasks?user_id=0
-app.get('/api/tasks', (req, res) => {
+app.get('/api/tasks', cors(corsOptions), (req, res) => {
     let user_id = parseInt( req.query.user_id );
     console.log(`GET Request for list of tasks detected with user_id=${user_id};`); 
     let curr_querry = `SELECT * FROM Tasks WHERE user_id = ${user_id} ORDER BY priority DESC;`;
@@ -60,7 +60,7 @@ app.get('/api/tasks', (req, res) => {
 });
                                             // requests for specific tasks in format
                                             // /api/tasks/1
-app.get('/api/tasks/:task_id', (req, res) => {
+app.get('/api/tasks/:task_id', cors(corsOptions), (req, res) => {
     let task_id = parseInt( req.params.task_id );
     console.log(`GET Request for task detected with task_id=${task_id};`); 
     let curr_querry = `SELECT * FROM Tasks WHERE task_id = ${task_id} ORDER BY priority DESC;`;
@@ -72,7 +72,7 @@ app.get('/api/tasks/:task_id', (req, res) => {
 });
 
                                             // POST requests
-app.post('/api/tasks', (req, res) => {
+app.post('/api/tasks', cors(corsOptions), (req, res) => {
     const { error } = validateTask(req.body);
     if(error) {
         res.status(400).send(error.details[0].message);
@@ -101,7 +101,7 @@ app.post('/api/tasks', (req, res) => {
                                         // PUT reqests
                                         // reqests in format
                                         // /api/tasks/0
-app.put('/api/tasks/:task_id', (req, res) => {
+app.put('/api/tasks/:task_id', cors(corsOptions), (req, res) => {
     let task_id = parseInt( req.params.task_id );
     console.log(`PUT Request for task detected with task_id=${task_id};`); 
     let curr_querry = `SELECT EXISTS (SELECT task_id FROM Tasks WHERE task_id = ${task_id}) as output;`;
@@ -132,7 +132,7 @@ app.put('/api/tasks/:task_id', (req, res) => {
                                         // DELETE requests
                                         // reqests in format
                                         // /api/tasks/0
-app.delete('/api/tasks/:task_id', (req, res) => {
+app.delete('/api/tasks/:task_id', cors(corsOptions), (req, res) => {
     let task_id = parseInt( req.params.task_id );
     console.log(`DELETE Request for task detected with task_id=${task_id};`); 
     let curr_querry = `SELECT EXISTS (SELECT task_id FROM Tasks WHERE task_id = ${task_id}) as output;`;
