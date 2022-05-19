@@ -37,14 +37,14 @@ function validateTask(task) {
 
                                         // GET requests 
 app.get('/', (req, res) => {
-    res.set('Access-Control-Allow-Origin', 'https://bigstuff.vercel.app/');
+    res.set('Access-Control-Allow-Origin', 'https://bigstuff.vercel.app');
     res.send('It works!');
     res.end();
 });
                                             // reqests in format 
                                             // /api/tasks?user_id=0
 app.get('/api/tasks', (req, res) => {
-    res.set('Access-Control-Allow-Origin', 'https://bigstuff.vercel.app/');
+    res.set('Access-Control-Allow-Origin', 'https://bigstuff.vercel.app');
     let user_id = parseInt( req.query.user_id );
     console.log(`GET Request for list of tasks detected with user_id=${user_id};`); 
     let curr_querry = `SELECT * FROM Tasks WHERE user_id = ${user_id} ORDER BY priority DESC;`;
@@ -57,7 +57,7 @@ app.get('/api/tasks', (req, res) => {
                                             // requests for specific tasks in format
                                             // /api/tasks/1
 app.get('/api/tasks/:task_id', (req, res) => {
-    res.set('Access-Control-Allow-Origin', 'https://bigstuff.vercel.app/');
+    res.set('Access-Control-Allow-Origin', 'https://bigstuff.vercel.app');
     let task_id = parseInt( req.params.task_id );
     console.log(`GET Request for task detected with task_id=${task_id};`); 
     let curr_querry = `SELECT * FROM Tasks WHERE task_id = ${task_id} ORDER BY priority DESC;`;
@@ -70,7 +70,7 @@ app.get('/api/tasks/:task_id', (req, res) => {
 
                                             // POST requests
 app.post('/api/tasks', (req, res) => {
-    res.set('Access-Control-Allow-Origin', 'https://bigstuff.vercel.app/');
+    res.set('Access-Control-Allow-Origin', 'https://bigstuff.vercel.app');
     const { error } = validateTask(req.body);
     if(error) {
         res.status(400).send(error.details[0].message);
@@ -100,7 +100,7 @@ app.post('/api/tasks', (req, res) => {
                                         // reqests in format
                                         // /api/tasks/0
 app.put('/api/tasks/:task_id', (req, res) => {
-    res.set('Access-Control-Allow-Origin', 'https://bigstuff.vercel.app/');
+    res.set('Access-Control-Allow-Origin', 'https://bigstuff.vercel.app');
     let task_id = parseInt( req.params.task_id );
     console.log(`PUT Request for task detected with task_id=${task_id};`); 
     let curr_querry = `SELECT EXISTS (SELECT task_id FROM Tasks WHERE task_id = ${task_id}) as output;`;
@@ -132,7 +132,7 @@ app.put('/api/tasks/:task_id', (req, res) => {
                                         // reqests in format
                                         // /api/tasks/0
 app.delete('/api/tasks/:task_id', (req, res) => {
-    res.set('Access-Control-Allow-Origin', 'https://bigstuff.vercel.app/');
+    res.set('Access-Control-Allow-Origin', 'https://bigstuff.vercel.app');
     let task_id = parseInt( req.params.task_id );
     console.log(`DELETE Request for task detected with task_id=${task_id};`); 
     let curr_querry = `SELECT EXISTS (SELECT task_id FROM Tasks WHERE task_id = ${task_id}) as output;`;
