@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 * {
   box-sizing: border-box;
@@ -7,15 +8,11 @@
   padding: 0;
 }
 
-body {
-  font-family: "Poppins", sans-serif;
-}
-
 .container {
   max-width: 80%;
   margin: 2% auto;
   overflow: auto;
-  min-height: 80%;
+  max-height: 80%;
   border: 2px solid rgb(95, 14, 132);
   padding: 30px;
   border-radius: 5px;
@@ -75,3 +72,11 @@ body {
   flex: 2;
   height: 20px;
 }
+
+.mat-success {
+  background-color: green;
+  color: #fff;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,0 +1,41 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn-home {
+    margin: 1% auto;
+}
+
+.user-name {
+    font-size: larger;
+    margin-top: 1%;
+    text-align: center;
+    font-weight: 420;
+}
+
+.btnwrap {
+    width: 25%;
+    height: 50%;
+    margin: 2% auto;
+    overflow: auto;
+    border: 4px solid rgb(95, 14, 132);
+    padding: 30px;
+    border-radius: 25px;
+}
+
+.signout-btn {
+    width: 25%;
+    height: 24%;
+    font-size: 17px;
+    display: block;
+    margin: 0 auto 2% auto;
+    text-align: center;
+}
+
+@media (max-width: 800px) {
+    .signout-btn {
+        width: 80%;
+    }
+}

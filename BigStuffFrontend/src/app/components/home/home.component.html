@@ -1,0 +1,26 @@
+<div *ngIf="auth.user$ | async as user">
+    <div>
+        <p class="user-name">{{ user.displayName }} is logged in</p>
+    </div>
+    <br>
+    <button mat-raised-button class="signout-btn" color="primary" (click)="logout()">
+        Sign out
+    </button>
+</div>
+<div *ngIf="!(afAuth.user | async)">
+    <p class="user-name" style="margin-bottom: 1%">No logged in users</p>
+</div>
+<hr>
+<div class="btnwrap">
+    <button mat-raised-button class="home-btn" color="primary" [routerLink]="['/login']" routerLinkActive="router-link-active">
+        Log in
+    </button>
+    
+    <button mat-raised-button class="home-btn" color="warn" [routerLink]="['/signup']" routerLinkActive="router-link-active">
+        Sign up
+    </button>
+    
+    <button mat-raised-button class="home-btn" color="success" [routerLink]="['/dashboard']" routerLinkActive="router-link-active">
+        My tasks
+    </button>
+</div>
