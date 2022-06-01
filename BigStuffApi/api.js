@@ -11,11 +11,7 @@ const apiPort = process.env.PORT || 3000;
 
 app.use(express.json());
 
-
-const corsOptions = {
-    origin: ["https://bigstuff.vercel.app", "https://bigstuff.vercel.app/dashboard", "https://bigstuff-pronoooobster.vercel.app", "https://bigstuff-git-main-pronoooobster.vercel.app"]
-};
-app.use(cors(corsOptions));
+app.use(cors());
 
                                                 // database connection configuration
 var db_con = mysql.createConnection({
