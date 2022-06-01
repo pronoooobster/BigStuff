@@ -6,7 +6,7 @@ const { use } = require('express/lib/application');
 const express = require('express');
 const app = express();
 const apiPort = process.env.PORT || 3000;
- const cors = require('cors');
+const cors = require('cors');
 
 
 app.use(express.json());
@@ -128,7 +128,7 @@ app.put('/api/tasks/:task_id', (req, res) => {
         return;
     }
 
-    curr_querry = `UPDATE Tasks SET user_id = ${req.body.user_id},
+    curr_querry = `UPDATE Tasks SET user_id = '${req.body.user_id}',
                      task_name = '${req.body.task_name}', deadline = '${req.body.deadline}', 
                      reminder = ${req.body.reminder}, priority = ${req.body.priority} WHERE task_id = ${task_id};`;
     db_con.query(curr_querry, function(err, result, fields) {
