@@ -9,9 +9,10 @@ import { User } from 'src/app/User';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  user?: User | null;
 
   constructor(public afAuth: AngularFireAuth, public auth: AuthService) {
-    auth.user$?.subscribe(user => console.log(user));
+    
   }
 
   ngOnInit(): void {

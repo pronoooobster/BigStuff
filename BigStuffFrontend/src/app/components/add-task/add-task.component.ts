@@ -31,7 +31,7 @@ export class AddTaskComponent implements OnInit {
     }
     
     const newTask = {
-      user_id: 0,
+      user_id: '0',
       task_name: this.text,
       deadline: this.date.toString(),
       reminder: this.reminder,

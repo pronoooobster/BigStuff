@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import {Task} from '../Task';
 import { Observable } from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from '../User';
+import { getAuth } from "firebase/auth";
+
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,11 +18,14 @@ const httpOptions = {
 })
 export class TaskService {
   private apiUrl = 'https://bigstuffapi.vercel.app/api';
+  user?: User | null;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public auth: AuthService) {
+    
+  }
 
   getTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.apiUrl + '/tasks?user_id=0');
+    return this.http.get<Task[]>(`${this.apiUrl}/tasks?user_id=${ getAuth().currentUser?.uid }`);
   }
 
   removeTask(task: Task): Observable<Task> {
@@ -32,6 +39,7 @@ export class TaskService {
   }
 
   addTask(task: Task): Observable<Task> {
+    task.user_id=getAuth().currentUser?.uid;
     return this.http.post<Task>(this.apiUrl + '/tasks', task, httpOptions);
   }
 }

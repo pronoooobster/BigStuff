@@ -40,6 +40,7 @@ export class AuthService {
         displayName: user.displayName
       });
       this.router.navigate(['/dashboard']);
+
     })
     .catch(error => {
       console.log('Auth service signup error', error);

@@ -34,7 +34,7 @@ db_con.connect((err) => {
 function validateTask(task) {
     const schema = Joi.object({
         task_id: Joi.number(),
-        user_id: Joi.number().required(),
+        user_id: Joi.string().required(),
         task_name: Joi.string().max(100),
         deadline: Joi.string(),
         reminder: Joi.boolean(),
@@ -53,9 +53,9 @@ app.get('/', (req, res) => {
                                             // /api/tasks?user_id=0
 app.get('/api/tasks', (req, res) => {
     
-    let user_id = parseInt( req.query.user_id );
+    let user_id = req.query.user_id;
     console.log(`GET Request for list of tasks detected with user_id=${user_id};`); 
-    let curr_querry = `SELECT * FROM Tasks WHERE user_id = ${user_id} ORDER BY priority DESC;`;
+    let curr_querry = `SELECT * FROM Tasks WHERE user_id = '${user_id}' ORDER BY priority DESC;`;
 
     db_con.query(curr_querry, function(err, result, fields) {
         if(err) throw err;
@@ -95,7 +95,7 @@ app.post('/api/tasks', (req, res) => {
     };
 
     let curr_querry = `INSERT INTO Tasks (task_id, user_id, task_name, deadline, reminder, priority) 
-                        VALUES (null, ${req.body.user_id}, '${req.body.task_name}', '${req.body.deadline}', ${req.body.reminder}, ${req.body.priority});`;
+                        VALUES (null, '${req.body.user_id}', '${req.body.task_name}', '${req.body.deadline}', ${req.body.reminder}, ${req.body.priority});`;
 
     db_con.query(curr_querry, function(err, result, fields) {
         if(err) throw err;
