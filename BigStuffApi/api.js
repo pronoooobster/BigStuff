@@ -11,7 +11,11 @@ const cors = require('cors');
 
 app.use(express.json());
 
-app.use(cors());
+const corsOptions = {
+    origin: ["https://bigstuff.vercel.app", "https://bigstuff-pronoooobster.vercel.app", "https://bigstuff-git-main-pronoooobster.vercel.app"]
+};
+
+app.use(cors(corsOptions));
 
                                                 // database connection configuration
 var db_con = mysql.createConnection({
