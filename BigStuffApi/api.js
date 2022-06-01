@@ -13,7 +13,7 @@ app.use(express.json());
 
 
 const corsOptions = {
-    origin: ["https://bigstuff.vercel.app", "https://bigstuff-pronoooobster.vercel.app", "https://bigstuff-git-main-pronoooobster.vercel.app"]
+    origin: ["https://bigstuff.vercel.app", "https://bigstuff.vercel.app/dashboard", "https://bigstuff-pronoooobster.vercel.app", "https://bigstuff-git-main-pronoooobster.vercel.app"]
 };
 app.use(cors(corsOptions));
 
